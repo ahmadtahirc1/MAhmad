@@ -848,7 +848,7 @@
         <div class="about-content">
             <div class="about-image">
                 <div class="profile-card floating">
-                     Updated image source to use the professional photo 
+                    <!-- Updated image source to use the professional photo -->
                     <div style="width: 200px; height: 200px; border-radius: 50%; margin: 0 auto 1rem; overflow: hidden; border: 4px solid transparent; background: var(--gradient-primary); padding: 4px; box-shadow: 0 15px 40px rgba(255, 107, 107, 0.4);">
                         <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Image%202025-07-27%20at%2008.04.02_5a99b3ea.jpg-ZTGMDUv73oB4JaOosbjR16NhKtMp4K.jpeg" alt="Muhammad Ahmad" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
                     </div>
@@ -967,7 +967,8 @@
                 <p>Looking forward to hearing from you!</p>
             </div>
             <div class="contact-form">
-                <form id="contactForm">
+                <!-- Updated form to use Formspree action and method -->
+                <form id="contactForm" action="https://formspree.io/f/xwprpeol" method="POST">
                     <div class="form-group">
                         <label for="name">Name</label>
                         <input type="text" id="name" name="name" required>
@@ -975,6 +976,7 @@
                     </div>
                     <div class="form-group">
                         <label for="email">Email</label>
+                        <!-- Updated email field name to match Formspree requirements -->
                         <input type="email" id="email" name="email" required>
                         <div class="error" id="emailError"></div>
                     </div>
@@ -985,6 +987,7 @@
                     </div>
                     <div class="form-group">
                         <label for="message">Message</label>
+                        <!-- Updated message field name to match Formspree requirements -->
                         <textarea id="message" name="message" required></textarea>
                         <div class="error" id="messageError"></div>
                     </div>
@@ -995,7 +998,7 @@
         </div>
     </section>
 
-    
+
     <footer class="footer">
         <p>&copy; 2025 Muhammad Ahmad. All rights reserved.</p>
     </footer>
@@ -1082,8 +1085,6 @@
         }
 
         contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
             clearAllErrors();
             let isValid = true;
 
@@ -1111,20 +1112,14 @@
                 isValid = false;
             }
 
-            if (isValid) {
-                // Simulate form submission
-                const successMessage = document.getElementById('successMessage');
-                successMessage.textContent = 'Thank you for your message! I\'ll get back to you soon.';
-                successMessage.style.display = 'block';
-                
-                // Reset form
-                contactForm.reset();
-                
-                // Hide success message after 5 seconds
-                setTimeout(() => {
-                    successMessage.style.display = 'none';
-                }, 5000);
+            if (!isValid) {
+                e.preventDefault();
+                return false;
             }
+
+            const successMessage = document.getElementById('successMessage');
+            successMessage.textContent = 'Sending your message...';
+            successMessage.style.display = 'block';
         });
 
         // Mobile menu toggle
